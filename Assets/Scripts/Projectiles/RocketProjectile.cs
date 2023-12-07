@@ -11,6 +11,8 @@ public class RocketProjectile : MonoBehaviour
 
     //public ParticleManager particleManager;
 
+    //PARENT
+
     public GameObject particleHandler;
 
     void Start()
