@@ -16,6 +16,7 @@ public class SOPistol : ScriptableObject
     [Header("Weapon Type")]
     public bool isAMachineGun;
     public bool isARocketLauncher;
+    public bool isAGrenadeLauncher;
     //[Header("Weapon Customs")]
     //public Texture2D crosshairTexture;
     //public AudioClip fireSound;

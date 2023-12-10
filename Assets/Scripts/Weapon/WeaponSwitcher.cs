@@ -7,21 +7,22 @@ public class WeaponSwitcher : MonoBehaviour
 {
     public GameObject[] weapons;
     public GameObject projectile;
+    public GameObject projectileGrenade;
     public GameObject[] bulletsRenderer;
 
     private int currentWeaponIndex = 0;
     private int mouseWeapon;
 
-    public int[] maxAmmo = new int[4];
-    public int[] currentAmmo = new int[4];
-    public int[] currentMaxAmmo = new int[4];
+    public int[] maxAmmo;
+    public int[] currentAmmo;
+    public int[] currentMaxAmmo;
 
-    public TextMeshProUGUI[] ammoTexts = new TextMeshProUGUI[4];
-    public TextMeshProUGUI[] maxAmmoTexts = new TextMeshProUGUI[4];
+    public TextMeshProUGUI[] ammoTexts;
+    public TextMeshProUGUI[] maxAmmoTexts;
 
     public AudioClip shot;
 
-    public ParticleSystem[] muzzleFlash = new ParticleSystem[4];
+    public ParticleSystem[] muzzleFlash;
 
     public Camera playerCamera;
 
@@ -32,10 +33,12 @@ public class WeaponSwitcher : MonoBehaviour
 
     public bool isARocketLauncher;
     public bool isAMachineGun;
+    public bool isAGrenadeLauncher;
     private bool canReload;
     private bool outOfBullets;
 
     public Transform spawnPoint;
+    public Transform spawnPointGen;
 
     private IEnumerator coroutine;
 
@@ -45,7 +48,7 @@ public class WeaponSwitcher : MonoBehaviour
     public delegate void WeaponFiredStop();
     public static WeaponFiredStop weaponFiredStop;
 
-    public SOPistol[] weaponData = new SOPistol[4];
+    public SOPistol[] weaponData;
 
 
 
@@ -65,7 +68,7 @@ public class WeaponSwitcher : MonoBehaviour
 
         if (scrollWheel != 0f)
         {
-            if ((scrollWheel > 0f) && (mouseWeapon <= 3))
+            if ((scrollWheel > 0f) && (mouseWeapon <= 4))
             {
                 
                 mouseWeapon++;
@@ -107,6 +110,13 @@ public class WeaponSwitcher : MonoBehaviour
         {
             
             SwitchToWeapon(3);
+            //isAMachineGun = false;
+            //isARocketLauncher = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+
+            SwitchToWeapon(4);
             //isAMachineGun = false;
             //isARocketLauncher = true;
         }
@@ -204,7 +214,7 @@ public class WeaponSwitcher : MonoBehaviour
                 muzzleFlash[currentWeaponIndex].Play();
             }
 
-            if (!isARocketLauncher)
+            if (!isARocketLauncher && !isAGrenadeLauncher)
             {
                 Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -232,6 +242,11 @@ public class WeaponSwitcher : MonoBehaviour
             if (isARocketLauncher)
             {
                 Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
+            }
+
+            if (isAGrenadeLauncher)
+            {
+                Instantiate(projectileGrenade, spawnPointGen.position, spawnPointGen.rotation);
             }
 
         }
@@ -285,6 +300,7 @@ public class WeaponSwitcher : MonoBehaviour
         //accuracyMax = weaponData.accuracyMax;
         isAMachineGun = weaponData[currentWeaponIndex].isAMachineGun;
         isARocketLauncher = weaponData[currentWeaponIndex].isARocketLauncher;
+        isAGrenadeLauncher = weaponData[currentWeaponIndex].isAGrenadeLauncher;
         //crosshairTexture = weaponData.crosshairTexture;
         //fireSound = weaponData.fireSound;
     }
