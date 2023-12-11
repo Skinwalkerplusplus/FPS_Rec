@@ -42,6 +42,8 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
     void Start()
     {
+        //patrolPoints = GameObject.FindObjectsOfType<PatrolPoint>();
+
         agent = GetComponent<NavMeshAgent>();
 
         for (int i = 0; i < patrolPoints.Length; i++)

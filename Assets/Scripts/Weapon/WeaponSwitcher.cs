@@ -50,9 +50,6 @@ public class WeaponSwitcher : MonoBehaviour
 
     public SOPistol[] weaponData;
 
-
-
-
     void Start()
     {
         GetWeaponData();
