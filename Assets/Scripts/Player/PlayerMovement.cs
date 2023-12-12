@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform myCamera;
     Vector3 move;
 
-    CharacterController controler;
+    CharacterController controllerPlayer;
     public bool canSprint;
 
     public float movSpeed = 5;
@@ -33,16 +33,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        controler = GetComponent<CharacterController>();
+        Time.fixedDeltaTime = 0.01f;
+        controllerPlayer = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = true;
         m_playerCameraRotation = Vector3.zero;
         cameraRotation = Vector2.zero;
         canSprint = true;
+        Debug.Log(Time.fixedDeltaTime);
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         cameraRotation.x = Input.GetAxis("Mouse Y"); /** m_inversionY;*/
         cameraRotation.y = Input.GetAxis("Mouse X"); /** m_inversionX;*/
 
-        Vector3 cameraRotationVector = new Vector3(cameraRotation.x, 0, 0) * (cameraRotationSpeed * Time.deltaTime);
+        Vector3 cameraRotationVector = new Vector3(cameraRotation.x, 0, 0) * (cameraRotationSpeed * Time.fixedDeltaTime);
         myCamera.Rotate(-cameraRotationVector);
 
         float angleTransformation = (myCamera.eulerAngles.x > 180)
@@ -71,13 +73,13 @@ public class PlayerMovement : MonoBehaviour
         myCamera.localEulerAngles = cameraRotationVector;
 
         m_playerCameraRotation.y = cameraRotation.y;
-        transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.deltaTime));
+        transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.fixedDeltaTime));
     }
 
     void Movement()
     {
 
-        if (controler.isGrounded)
+        if (controllerPlayer.isGrounded)
         {
             move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
             move *= movSpeed;
@@ -104,8 +106,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        move.y += gravity * gravityMultip * Time.deltaTime;
-        controler.Move(move * Time.deltaTime);
+        move.y += gravity * gravityMultip * Time.fixedDeltaTime;
+        controllerPlayer.Move(move / 50);
     }
 
 
