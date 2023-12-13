@@ -4403,6 +4403,14 @@ PrefabInstance:
       propertyPath: bulletsRenderer.Array.data[4]
       value: 
       objectReference: {fileID: 1426364828}
+    - target: {fileID: 4409426740135107796, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409426740135107798, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
+      propertyPath: cameraRotationSpeed
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 4409426740135107799, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6979222

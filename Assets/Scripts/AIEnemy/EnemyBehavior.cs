@@ -14,6 +14,7 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     private bool isDead = false;
 
     public Transform[] patrolPoints;
+    private PatrolPoint[] patrolCache;
     private int currentPatrolPointIndex = 0;
     private bool isPatrolling = false;
 
@@ -45,6 +46,13 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
         //patrolPoints = GameObject.FindObjectsOfType<PatrolPoint>();
 
         player = FindObjectOfType<PlayerMovement>().transform;
+
+        patrolCache = FindObjectsOfType<PatrolPoint>();
+
+        //patrolPoints = patrolCache.transform;
+
+        
+        
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -175,13 +183,15 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
         if ((player != null) && (isDead == false))
         {
             agent.SetDestination(player.position);
-            Debug.Log(player.position);
-            Debug.Log(agent.SetDestination(player.position));
+            //Debug.Log(player.position);
+            //Debug.Log(agent.SetDestination(player.position));
         }
     }
 
     public void Attack()
     {
+        agent.speed = 0;
+
         Debug.Log("Attack");
         if (enemyAttack != null)
             enemyAttack();
