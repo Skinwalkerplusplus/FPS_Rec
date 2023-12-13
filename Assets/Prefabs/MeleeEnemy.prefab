@@ -119,7 +119,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+<<<<<<< Updated upstream
   player: {fileID: 0}
+=======
+>>>>>>> Stashed changes
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -142,7 +145,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -449,6 +452,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4589172278139151157, guid: b7bd32f4b5ee275438d1d414b0ed424e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 7169425169889999085, guid: 8df416ab12984f64380090c8650eee81, type: 3}
     - target: {fileID: 5120724536234783804, guid: b7bd32f4b5ee275438d1d414b0ed424e, type: 3}
       propertyPath: m_Layer
       value: 7

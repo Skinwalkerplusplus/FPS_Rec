@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float mouseSensitivity = 100f;
     private float moveSpeed = 5f;
     public Transform playerBody;
+    private Vector3 currentSpeedDirection;
 
     private float xRotation = 0f;
 
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float movSpeed = 5;
     [SerializeField] float jumpSpeed = 8;
+    [SerializeField] float jumpSpeedInAir = 3;
     [SerializeField] int gravityMultip = 1;
     float gravity = -9.8f;
 
@@ -48,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
-
 
         Rotation();
         Movement();
@@ -99,14 +100,18 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
+                currentSpeedDirection = move;
                 move.y = jumpSpeed;
             }
         }
 
+        else
+        {
+            move.x = currentSpeedDirection.x + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).x) * jumpSpeedInAir;
+            move.z = currentSpeedDirection.z + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).z) * jumpSpeedInAir;
+        }
 
         move.y += gravity * gravityMultip * Time.deltaTime;
         controler.Move(move * Time.deltaTime);
     }
-
-
 }

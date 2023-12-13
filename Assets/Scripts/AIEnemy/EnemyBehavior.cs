@@ -43,6 +43,7 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = 0;
 
         for (int i = 0; i < patrolPoints.Length; i++)
         {
@@ -139,7 +140,9 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
     void PlayerLost()
     {
+
         playerDetected = false;
+        agent.speed = 0;
         Debug.Log("Player lost!");
     }
 
@@ -168,6 +171,12 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
         if (player != null)
         {
             agent.SetDestination(player.position);
+<<<<<<< Updated upstream
+=======
+            agent.speed = 3;
+            //Debug.Log(player.position);
+            //Debug.Log(agent.SetDestination(player.position));
+>>>>>>> Stashed changes
         }
     }
 
