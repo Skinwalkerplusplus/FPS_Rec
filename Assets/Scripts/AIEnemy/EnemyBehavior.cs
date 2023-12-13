@@ -48,6 +48,8 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
         agent = GetComponent<NavMeshAgent>();
 
+        agent.speed = 0;
+
         //for (int i = 0; i < patrolPoints.Length; i++)
         //{
         //    patrolPointLoc[i] = patrolPoints[i].transform;
@@ -136,13 +138,14 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
     void PlayerDetected()
     {
-
+        agent.speed = 3;
         playerDetected = true;
         Debug.Log("Player detected!");
     }
 
     void PlayerLost()
     {
+        agent.speed = 0;
         playerDetected = false;
         Debug.Log("Player lost!");
     }

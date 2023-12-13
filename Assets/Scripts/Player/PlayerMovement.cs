@@ -8,8 +8,11 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 cameraRotation;
     private Vector3 m_playerCameraRotation;
+    private Vector3 currentSpeedDirection;
 
     [SerializeField] float cameraRotationSpeed = 180;
+    [SerializeField] float jumpSpeedInAir = 3;
+
 
     public float mouseSensitivity = 100f;
     private float moveSpeed = 5f;
@@ -101,10 +104,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetButton("Jump"))
             {
+                currentSpeedDirection = move;
                 move.y = jumpSpeed;
             }
         }
 
+        else
+        {
+            move.x = currentSpeedDirection.x + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).x) * jumpSpeedInAir;
+            move.z = currentSpeedDirection.z + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).z) * jumpSpeedInAir;
+        }
 
         move.y += gravity * gravityMultip * Time.fixedDeltaTime;
         controllerPlayer.Move(move / 50);
