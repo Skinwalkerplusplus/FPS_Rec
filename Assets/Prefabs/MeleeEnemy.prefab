@@ -28,6 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8718277462419877087}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.21, y: 1.38, z: -10.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,7 +36,6 @@ Transform:
   m_Children:
   - {fileID: 9184865302869359106}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8718277462419877083
 MeshFilter:
@@ -95,8 +95,17 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8718277462419877087}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -119,19 +128,17 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  player: {fileID: 0}
+  player: {fileID: 4409426740135107799, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
   patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7257676318384624386, guid: 9361fcd8d8cae264896d8a26e0a40c79, type: 3}
+  - {fileID: 5039549310464553616, guid: 5b62c8738e3f5a8408fd5dfd64ffa777, type: 3}
+  - {fileID: 8395502598449209402, guid: bc44bc10f12d31a41bdd126158e74a89, type: 3}
   enemyHealth: 30
   timeLimit: 60
   canAttack: 1
   animator: {fileID: 2996897615669059704}
   enemyPrefabs:
   - {fileID: 3303653903700464735, guid: 31584530a3e5aa645b0df27c606afdf6, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!195 &8718277462419877081
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -159,6 +166,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8718277462419877082}
     m_Modifications:
     - target: {fileID: -9070493210130169274, guid: b7bd32f4b5ee275438d1d414b0ed424e, type: 3}
@@ -502,6 +510,9 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7bd32f4b5ee275438d1d414b0ed424e, type: 3}
 --- !u!95 &2996897615669059704 stripped
 Animator:

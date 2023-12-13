@@ -21,5 +21,7 @@ public class SOPistol : ScriptableObject
     //public Texture2D crosshairTexture;
     //public AudioClip fireSound;
 
+    public GameObject[] patrolPoint;
+
 
 }

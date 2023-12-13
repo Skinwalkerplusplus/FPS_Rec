@@ -431,11 +431,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4579599744428854276, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
   m_PrefabInstance: {fileID: 4409426740406365319}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &295284550 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1109397025668399733, guid: 5b61b24e185ea2f4694ad80084eddc9b, type: 3}
-  m_PrefabInstance: {fileID: 1109397025911123251}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &299577424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4409426740135107799, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
@@ -1059,11 +1054,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &404898024 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8718277462419877087, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
-  m_PrefabInstance: {fileID: 8718277462824774711}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &470578684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1136,10 @@ PrefabInstance:
     - target: {fileID: 6160204698516683652, guid: 1576fe6af442662448b2dcc75bcfcbbf, type: 3}
       propertyPath: m_Name
       value: GrenadeProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160204698516683652, guid: 1576fe6af442662448b2dcc75bcfcbbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2867,9 +2861,9 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1535455830 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5039549310464553617, guid: 5b62c8738e3f5a8408fd5dfd64ffa777, type: 3}
+--- !u!4 &1535455831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5039549310464553616, guid: 5b62c8738e3f5a8408fd5dfd64ffa777, type: 3}
   m_PrefabInstance: {fileID: 11756656091988531}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1551648338
@@ -2933,8 +2927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 404898024}
-  - {fileID: 295284550}
+  - {fileID: 8718277462419877087, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
+  - {fileID: 1109397025668399733, guid: 5b61b24e185ea2f4694ad80084eddc9b, type: 3}
   spawnPoints:
   - {fileID: 470578685}
   - {fileID: 1848647748}
@@ -3196,7 +3190,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  player: {fileID: 299577424}
   patrolPoints:
   - {fileID: 1079735975}
   - {fileID: 359375201}
@@ -3471,7 +3464,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  player: {fileID: 299577424}
   patrolPoints:
   - {fileID: 1079735975}
   - {fileID: 359375201}
@@ -4054,6 +4046,10 @@ PrefabInstance:
     - target: {fileID: 1180778653919081438, guid: c422a8cbbd1aecb4f9b3ff676df78f32, type: 3}
       propertyPath: m_Name
       value: ParticleGenericHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180778653919081438, guid: c422a8cbbd1aecb4f9b3ff676df78f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5951219156242032841, guid: c422a8cbbd1aecb4f9b3ff676df78f32, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4776,10 +4772,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8718277462419877082, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8718277462419877082, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.21
       objectReference: {fileID: 0}
@@ -4826,15 +4818,15 @@ PrefabInstance:
     - target: {fileID: 8718277462419877086, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1535455830}
+      objectReference: {fileID: 1535455831}
     - target: {fileID: 8718277462419877086, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
       propertyPath: patrolPoints.Array.data[1]
       value: 
-      objectReference: {fileID: 920472647}
+      objectReference: {fileID: 920472648}
     - target: {fileID: 8718277462419877086, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
       propertyPath: patrolPoints.Array.data[2]
       value: 
-      objectReference: {fileID: 1551648338}
+      objectReference: {fileID: 1551648339}
     - target: {fileID: 8718277462419877087, guid: 26a695796b675b04eb96d57e81f03f26, type: 3}
       propertyPath: m_Name
       value: MeleeEnemy

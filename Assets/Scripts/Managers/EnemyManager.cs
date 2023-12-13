@@ -29,10 +29,10 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomIndex = Random.Range(0, enemyPrefabs.Length);
+        int randomIndex = Random.Range(0, enemyPrefabs.Length - 1);
         GameObject enemyPrefab = enemyPrefabs[randomIndex];
 
-        int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
+        int randomSpawnPoint = Random.Range(0, spawnPoints.Length - 1);
         Transform spawnPoint = spawnPoints[randomSpawnPoint];
 
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);

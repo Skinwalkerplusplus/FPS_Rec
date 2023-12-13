@@ -9,11 +9,11 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     public float hearingRange = 5f;
     public float attackRange = 3f;
     public LayerMask playerLayer;
-    public Transform player;
+    private Transform player;
     private bool playerDetected = false;
+    private bool isDead = false;
 
-    public GameObject[] patrolPoints;
-    private Transform[] patrolPointLoc;
+    public Transform[] patrolPoints;
     private int currentPatrolPointIndex = 0;
     private bool isPatrolling = false;
 
@@ -44,19 +44,21 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     {
         //patrolPoints = GameObject.FindObjectsOfType<PatrolPoint>();
 
+        player = FindObjectOfType<PlayerMovement>().transform;
+
         agent = GetComponent<NavMeshAgent>();
 
-        for (int i = 0; i < patrolPoints.Length; i++)
-        {
-            patrolPointLoc[i] = patrolPoints[i].transform;
-        }
+        //for (int i = 0; i < patrolPoints.Length; i++)
+        //{
+        //    patrolPointLoc[i] = patrolPoints[i].transform;
+        //}
 
-        if (patrolPoints.Length > 0)
-        {
-            // Start patrolling if there are patrol points defined
-            isPatrolling = true;
-            agent.SetDestination(patrolPoints[currentPatrolPointIndex].transform.position);
-        }
+        //if (patrolPoints.Length > 0)
+        //{
+        //    // Start patrolling if there are patrol points defined
+        //    isPatrolling = true;
+        //    agent.SetDestination(patrolPoints[currentPatrolPointIndex].transform.position);
+        //}
     }
 
     void Update()
@@ -167,9 +169,11 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
     void ChasePlayer()
     {
-        if (player != null)
+        if ((player != null) && (isDead == false))
         {
             agent.SetDestination(player.position);
+            Debug.Log(player.position);
+            Debug.Log(agent.SetDestination(player.position));
         }
     }
 
@@ -192,6 +196,7 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
 
         if (enemyDeath1 != null)
             enemyDeath1(20);
+        isDead = true;
         Destroy(this.gameObject);
     }
 

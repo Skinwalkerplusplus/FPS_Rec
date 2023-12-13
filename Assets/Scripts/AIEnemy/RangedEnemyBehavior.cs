@@ -11,6 +11,7 @@ public class RangedEnemyBehavior : MonoBehaviour, IEnemyBasic
     public LayerMask playerLayer;
     public Transform player;
     private bool playerDetected = false;
+    private bool isDead = false;
 
     public Transform[] patrolPoints;
     private int currentPatrolPointIndex = 0;
@@ -150,7 +151,7 @@ public class RangedEnemyBehavior : MonoBehaviour, IEnemyBasic
 
     void ChasePlayer()
     {
-        if (player != null)
+        if ((player != null) && (isDead == false))
         {
             agent.SetDestination(player.position);
         }
@@ -173,6 +174,7 @@ public class RangedEnemyBehavior : MonoBehaviour, IEnemyBasic
     {
         if (enemyDeath2 != null)
             enemyDeath2(30);
+        isDead = true;
         Destroy(this.gameObject);
     }
 
