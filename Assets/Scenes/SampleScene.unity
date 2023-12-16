@@ -4408,8 +4408,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4409426740135107798, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
+      propertyPath: mouseSensitivity
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409426740135107798, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
       propertyPath: cameraRotationSpeed
-      value: 300
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4409426740135107799, guid: 48313f44a0d1042468aa738c7a11c4b2, type: 3}
       propertyPath: m_LocalPosition.x
