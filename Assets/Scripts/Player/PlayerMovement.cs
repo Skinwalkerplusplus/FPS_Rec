@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerBody;
 
     private float xRotation = 0f;
+    private float yRotation = 0f;
 
     public Transform myCamera;
     Vector3 move;
@@ -61,11 +62,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotation()
     {
-        cameraRotation.x = Input.GetAxis("Mouse Y"); /** m_inversionY;*/
-        cameraRotation.y = Input.GetAxis("Mouse X"); /** m_inversionX;*/
+        cameraRotation.y = Input.GetAxis("Mouse Y"); /** m_inversionY;*/
+        cameraRotation.x = Input.GetAxis("Mouse X"); /** m_inversionX;*/
 
         Vector3 cameraRotationVector = new Vector3(cameraRotation.x, 0, 0) * (cameraRotationSpeed * Time.fixedDeltaTime);
-        myCamera.Rotate(-cameraRotationVector);
+        //myCamera.Rotate(-cameraRotationVector);
 
         float angleTransformation = (myCamera.eulerAngles.x > 180)
             ? myCamera.localEulerAngles.x - 360
@@ -77,6 +78,19 @@ public class PlayerMovement : MonoBehaviour
 
         m_playerCameraRotation.y = cameraRotation.y;
         transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.fixedDeltaTime));
+        myCamera.rotation = Quaternion.Slerp(Quaternion.Euler(myCamera.rotation.x, myCamera.rotation.y, 0), Quaternion.Euler(myCamera.localEulerAngles.x, myCamera.localEulerAngles.y, 0), Time.fixedDeltaTime * cameraRotationSpeed);
+
+        //Quaternion targetRotation = Quaternion.Euler(0f, cameraRotation.y * cameraRotationSpeed, 0f);
+
+        //myCamera.rotation = Quaternion.Lerp(myCamera.rotation, targetRotation, Time.deltaTime * cameraRotationSpeed);
+
+        //yRotation += mouseX;
+
+        //xRotation -= mouseY;
+        //yRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        //transform.rotation = Quaternion.Euler(0, myCamera.rotation.y, 0);
+        //myCamera.rotation = Quaternion.Slerp(Quaternion.Euler(myCamera.rotation.x, myCamera.rotation.y, 0), Quaternion.Euler(xRotation, yRotation, 0), Time.fixedDeltaTime * mouseSensitivity);
     }
 
     void Movement()
