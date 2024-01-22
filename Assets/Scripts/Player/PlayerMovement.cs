@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpSpeedInAir = 3;
 
 
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity;
     private float moveSpeed = 5f;
     public Transform playerBody;
 
@@ -55,6 +55,11 @@ public class PlayerMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
+        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
         Rotation();
         Movement();
@@ -62,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotation()
     {
-        cameraRotation.y = Input.GetAxis("Mouse Y"); /** m_inversionY;*/
-        cameraRotation.x = Input.GetAxis("Mouse X"); /** m_inversionX;*/
+        cameraRotation.x = Input.GetAxis("Mouse Y"); /** m_inversionY;*/
+        cameraRotation.y = Input.GetAxis("Mouse X"); /** m_inversionX;*/
 
-        Vector3 cameraRotationVector = new Vector3(cameraRotation.x, 0, 0) * (cameraRotationSpeed * Time.fixedDeltaTime);
-        //myCamera.Rotate(-cameraRotationVector);
+        Vector3 cameraRotationVector = new Vector3(cameraRotation.x, 0, 0) * (cameraRotationSpeed * Time.deltaTime);
+        myCamera.Rotate(-cameraRotationVector);
 
         float angleTransformation = (myCamera.eulerAngles.x > 180)
             ? myCamera.localEulerAngles.x - 360
@@ -77,8 +82,26 @@ public class PlayerMovement : MonoBehaviour
         myCamera.localEulerAngles = cameraRotationVector;
 
         m_playerCameraRotation.y = cameraRotation.y;
-        transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.fixedDeltaTime));
-        myCamera.rotation = Quaternion.Slerp(Quaternion.Euler(myCamera.rotation.x, myCamera.rotation.y, 0), Quaternion.Euler(myCamera.localEulerAngles.x, myCamera.localEulerAngles.y, 0), Time.fixedDeltaTime * cameraRotationSpeed);
+        transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.deltaTime));
+
+        //cameraRotation.y = Input.GetAxis("Mouse X"); /** m_inversionY;*/
+        //cameraRotation.x = Input.GetAxis("Mouse Y"); /** m_inversionX;*/
+
+        //Vector3 cameraRotationVector = new Vector3(cameraRotation.x, cameraRotation.y, 0) * (cameraRotationSpeed * Time.fixedDeltaTime);
+        //myCamera.Rotate(-cameraRotationVector);
+
+        //float angleTransformation = (myCamera.eulerAngles.x > 180)
+        //    ? myCamera.localEulerAngles.x - 360
+        //    : myCamera.localEulerAngles.x;
+
+        //cameraRotationVector = new Vector3(0, Mathf.Clamp(angleTransformation, -90, 90), 0);
+
+        //myCamera.localEulerAngles = cameraRotationVector;
+
+        //m_playerCameraRotation.y = cameraRotation.y;
+        //transform.Rotate(m_playerCameraRotation * (cameraRotationSpeed * Time.fixedDeltaTime));
+        //myCamera.localRotation = Quaternion.Lerp(Quaternion.Euler(myCamera.localRotation.x, myCamera.localRotation.y, 0), Quaternion.Euler(myCamera.localEulerAngles.x, myCamera.localEulerAngles.y, 0), Time.fixedDeltaTime * cameraRotationSpeed);
+        //myCamera.localRotation = Quaternion.Lerp(Quaternion.Euler(myCamera.localRotation.x, myCamera.localRotation.y, 0), Quaternion.Euler(myCamera.localEulerAngles.x, myCamera.localEulerAngles.y, 0), Time.fixedDeltaTime * cameraRotationSpeed);
 
         //Quaternion targetRotation = Quaternion.Euler(0f, cameraRotation.y * cameraRotationSpeed, 0f);
 

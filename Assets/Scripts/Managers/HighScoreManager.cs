@@ -6,7 +6,7 @@ using TMPro;
 
 public class HighScoreManager : MonoBehaviour
 {
-    public GameManager gm;
+    private GameManager gm;
 
     public TextMeshProUGUI highScore;
     public TextMeshProUGUI thisScore;
@@ -14,7 +14,7 @@ public class HighScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame

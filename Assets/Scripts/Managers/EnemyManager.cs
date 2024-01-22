@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     {
         currentEnemyCount--;
 
-        if (currentEnemyCount <= 5)
+        if (currentEnemyCount <= 5 && this != null)
         {
             Invoke("SpawnEnemy", spawnDelay);
         }

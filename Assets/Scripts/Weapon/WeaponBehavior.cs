@@ -18,8 +18,6 @@ public class WeaponBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             animator.SetBool("IsAiming", true);
@@ -43,12 +41,20 @@ public class WeaponBehavior : MonoBehaviour
 
     void Fire()
     {
-        animator.SetBool("IsFiring", true);
+        if (animator != null)
+        {
+            animator.SetBool("IsFiring", true);
+        }
+        
     }
 
     void StopFiring()
     {
-        animator.SetBool("IsFiring", false);
+        if (animator != null)
+        {
+            animator.SetBool("IsFiring", false);
+        }
+        
     }
 
 }

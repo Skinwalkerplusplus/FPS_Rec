@@ -10,14 +10,17 @@ public class WeaponSwitcher : MonoBehaviour
     public GameObject projectileGrenade;
     public GameObject[] bulletsRenderer;
 
+    public GameManager gm;
+
     private int currentWeaponIndex = 0;
     private int mouseWeapon;
+    public bool isPaused;
 
     public int[] maxAmmo;
     public int[] currentAmmo;
     public int[] currentMaxAmmo;
 
-    public TextMeshProUGUI[] ammoTexts;
+    //public TextMeshProUGUI[] ammoTexts;
     public TextMeshProUGUI[] maxAmmoTexts;
 
     public AudioClip shot;
@@ -55,6 +58,8 @@ public class WeaponSwitcher : MonoBehaviour
         GetWeaponData();
         SwitchToWeapon(currentWeaponIndex);
         coroutine = MachineGunFire();
+        PauseMenu.gameIsPaused += GamePaused;
+        gm = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -119,15 +124,20 @@ public class WeaponSwitcher : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            if (isAMachineGun)
+            if(isPaused == false)
             {
-                StartCoroutine(coroutine);
-            }
+                if (isAMachineGun)
+                {
+                    StartCoroutine(coroutine);
+                }
 
-            else
-            {
-                FireWeapon();
+                else
+                {
+                    Debug.Log("fireWeapon");
+                    FireWeapon();
+                }
             }
+            
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -268,7 +278,7 @@ public class WeaponSwitcher : MonoBehaviour
     void UpdateAmmoText(int weaponIndex)
     {
 
-        ammoTexts[weaponIndex].text = "Ammo: " + currentAmmo[weaponIndex] + "/" + currentMaxAmmo[weaponIndex];
+        gm.ammoTexts[weaponIndex].text = "Ammo: " + currentAmmo[weaponIndex] + "/" + currentMaxAmmo[weaponIndex];
 
     }
 
@@ -300,5 +310,10 @@ public class WeaponSwitcher : MonoBehaviour
         isAGrenadeLauncher = weaponData[currentWeaponIndex].isAGrenadeLauncher;
         //crosshairTexture = weaponData.crosshairTexture;
         //fireSound = weaponData.fireSound;
+    }
+
+    void GamePaused(bool paused)
+    {
+        isPaused = paused;
     }
 }
