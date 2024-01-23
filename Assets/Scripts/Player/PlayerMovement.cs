@@ -50,10 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
         {
