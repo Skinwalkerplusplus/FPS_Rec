@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerGame : MonoBehaviour
 {
+    public delegate void LoadSceneA(string scene);
+    public static LoadSceneA loadSceneA;
+
     public void Start()
     {
         GameManager.gameOver += LoadScene;
@@ -13,6 +16,8 @@ public class SceneManagerGame : MonoBehaviour
     public void LoadScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
+        //if (loadSceneA != null)
+        //    loadSceneA(sceneToLoad);
     }
 
     public void LoadNextScene()

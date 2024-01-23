@@ -16,7 +16,7 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     public Transform[] patrolPoints;
     private PatrolPoint[] patrolCache;
     private int currentPatrolPointIndex = 0;
-    private bool isPatrolling = false;
+    private bool isPatrolling = true;
 
     private NavMeshAgent agent;
 
@@ -50,9 +50,6 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
         patrolCache = FindObjectsOfType<PatrolPoint>();
 
         //patrolPoints = patrolCache.transform;
-
-        
-        
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -89,7 +86,6 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
                 Patrol();
             }
         }
-
         else
         {
             ChasePlayer();
@@ -103,7 +99,8 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
             }
             else
             {
-                StopCoroutine(TimerCoroutine());
+                agent.speed = 3;
+                StopAllCoroutines();
             }
         }
 
@@ -147,6 +144,8 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     void PlayerDetected()
     {
         agent.speed = 3;
+        ChasePlayer();
+        isPatrolling = false;
         playerDetected = true;
         Debug.Log("Player detected!");
     }
@@ -155,31 +154,33 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
     {
         agent.speed = 0;
         playerDetected = false;
+        isPatrolling = true;
         Debug.Log("Player lost!");
     }
 
     void Patrol()
     {
-
+        agent.speed = 1;
+        agent.SetDestination(patrolPoints[currentPatrolPointIndex].transform.position);
         if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPointIndex].transform.position) <= 0.1f)
         {
-
             currentPatrolPointIndex++;
             if (currentPatrolPointIndex >= patrolPoints.Length)
             {
                 currentPatrolPointIndex = 0;
             }
-            SetDestination(patrolPoints[currentPatrolPointIndex].transform);
+            
         }
     }
 
-    void SetDestination(Transform destination)
-    {
+    //void SetDestination(Transform destination)
+    //{
     
-    }
+    //}
 
     void ChasePlayer()
     {
+        
         if ((player != null) && (isDead == false))
         {
             agent.SetDestination(player.position);
