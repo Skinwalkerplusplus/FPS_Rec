@@ -30,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] int gravityMultip = 1;
     float gravity = -9.8f;
 
+    public GeometryBugFinder geoAgent;
+
+    public bool isRecording = false;
+
     //private int m_inversionX => (isXInverted) ? -1 : 1;
     //private int m_inversionY => (isYInverted) ? -1 : 1;
 
@@ -77,41 +81,83 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-
-        if (controler.isGrounded)
+        if (isRecording)
         {
-            move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
-            move *= movSpeed;
-            if (canSprint)
+            if (controler.isGrounded)
             {
-                if (Input.GetButtonDown("Run"))
+                move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
+                move *= movSpeed;
+                if (canSprint)
                 {
-                    movSpeed = 8f;
-                    Debug.Log("Down");
+                    if (Input.GetButtonDown("Run"))
+                    {
+                        movSpeed = 8f;
+                        Debug.Log("Down");
+                    }
+
+                    if (Input.GetButtonUp("Run"))
+                    {
+                        movSpeed = 5f;
+                        Debug.Log("Up");
+                    }
                 }
 
-                if (Input.GetButtonUp("Run"))
+
+                if (Input.GetButton("Jump"))
                 {
-                    movSpeed = 5f;
-                    Debug.Log("Up");
+                    currentSpeedDirection = move;
+                    move.y = jumpSpeed;
                 }
             }
-            
 
-            if (Input.GetButton("Jump"))
+            else
             {
-                currentSpeedDirection = move;
-                move.y = jumpSpeed;
+                move.x = currentSpeedDirection.x + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).x) * jumpSpeedInAir;
+                move.z = currentSpeedDirection.z + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).z) * jumpSpeedInAir;
             }
+
+            move.y += gravity * gravityMultip * Time.deltaTime;
+            controler.Move(move * Time.deltaTime);
         }
 
         else
         {
-            move.x = currentSpeedDirection.x + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).x) * jumpSpeedInAir;
-            move.z = currentSpeedDirection.z + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).z) * jumpSpeedInAir;
-        }
+            if (controler.isGrounded)
+            {
+                move = transform.right * geoAgent.moveX + transform.forward * geoAgent.moveZ;
+                move *= movSpeed;
+                if (canSprint)
+                {
+                    if (Input.GetButtonDown("Run"))
+                    {
+                        movSpeed = 8f;
+                        Debug.Log("Down");
+                    }
 
-        move.y += gravity * gravityMultip * Time.deltaTime;
-        controler.Move(move * Time.deltaTime);
+                    if (Input.GetButtonUp("Run"))
+                    {
+                        movSpeed = 5f;
+                        Debug.Log("Up");
+                    }
+                }
+
+
+                if (Input.GetButton("Jump"))
+                {
+                    currentSpeedDirection = move;
+                    move.y = jumpSpeed;
+                }
+            }
+
+            else
+            {
+                move.x = currentSpeedDirection.x + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).x) * jumpSpeedInAir;
+                move.z = currentSpeedDirection.z + ((transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical")).z) * jumpSpeedInAir;
+            }
+
+            move.y += gravity * gravityMultip * Time.deltaTime;
+            controler.Move(move * Time.deltaTime);
+        }
+        
     }
 }

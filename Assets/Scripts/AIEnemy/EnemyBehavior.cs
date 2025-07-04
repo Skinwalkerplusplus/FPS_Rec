@@ -171,12 +171,9 @@ public class EnemyBehavior : MonoBehaviour, IEnemyBasic
         if (player != null)
         {
             agent.SetDestination(player.position);
-<<<<<<< Updated upstream
-=======
+
             agent.speed = 3;
-            //Debug.Log(player.position);
-            //Debug.Log(agent.SetDestination(player.position));
->>>>>>> Stashed changes
+
         }
     }
 
